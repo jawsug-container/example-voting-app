@@ -2,9 +2,10 @@ version: "2"
 
 services:
   voting-app:
-    build: ./voting-app
+    image: pottava/python:2.7
     command: python app.py
     volumes:
+      - ./voting-app/packages:/usr/lib/python2.7/site-packages/
       - ./voting-app:/app
     working_dir: /app
     ports:

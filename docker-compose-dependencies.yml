@@ -1,9 +1,25 @@
 version: "2"
 
 services:
+  voting-app:
+    image: pottava/python:2.7
+    command: sh -c "apk --no-cache add py-pip && pip install -r requirements.txt"
+    volumes:
+      - ./voting-app/requirements.txt:/app/requirements.txt
+      - ./voting-app/packages:/usr/lib/python2.7/site-packages/
+    working_dir: /app
+
   result-app:
     image: pottava/nodejs
     command: npm install
     volumes:
       - ./result-app:/app
+    working_dir: /app
+
+  worker:
+    image: pottava/maven:3.3-java7
+    command: sh -c "mvn dependency:resolve && mvn verify"
+    volumes:
+      - ./worker/pom.xml:/app/pom.xml
+      - ./worker/target:/app/target
     working_dir: /app

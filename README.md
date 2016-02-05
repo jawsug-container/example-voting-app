@@ -21,15 +21,23 @@ Docker Compose で起動し、Docker Networking を使いお互いに通信し�
 
 1. このディレクトリへ移動
 
-    $ cd /path/to/this/repository
+```
+$ cd /path/to/this/repository
+```
 
-2. Node.js の依存性を解決します（開発用、初回のみ）
+2. Node.js の依存性を解決します（初回 + 依存性変更後）
 
-    $ docker-compose -f docker-compose-dependencies.yml run result-app
+```
+$ docker-compose -f docker-compose-dependencies.yml run voting-app
+$ docker-compose -f docker-compose-dependencies.yml run result-app
+$ docker-compose -f docker-compose-dependencies.yml run worker
+```
 
 3. アプリケーションを起動します
 
-    $ docker-compose up
+```
+$ docker-compose up
+```
 
 投票は 5000 番ポート、結果は 5001 番ポートで繋がります。
 
@@ -42,6 +50,6 @@ Docker イメージ
 
  - [pottava/python:2.7](https://hub.docker.com/r/pottava/python/)
  - [pottava/nodejs](https://hub.docker.com/r/pottava/nodejs/)
- - [java:7](https://hub.docker.com/_/java/)
+ - [pottava/maven:3.3-java7](https://hub.docker.com/r/pottava/maven/)
  - [pottava/redis](https://hub.docker.com/r/pottava/redis/)
  - [kiasaki/alpine-postgres](https://hub.docker.com/r/kiasaki/alpine-postgres/)
