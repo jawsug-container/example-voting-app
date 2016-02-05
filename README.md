@@ -22,10 +22,11 @@ Docker Compose で起動し、Docker Networking を使いお互いに通信し�
 1. このディレクトリへ移動
 
 ```
-$ cd /path/to/this/repository
+$ git clone <this-repository>
+$ cd example-voting-app
 ```
 
-2. Node.js の依存性を解決します（初回 + 依存性変更後）
+2. 各サービスの依存性を解決します（初回 + 依存性変更後）
 
 ```
 $ docker-compose -f docker-compose-dependencies.yml run voting-app
