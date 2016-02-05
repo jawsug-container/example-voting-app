@@ -2,23 +2,30 @@ version: "2"
 
 services:
   voting-app:
-    build: ./voting-app/.
+    build: ./voting-app
+    command: python app.py
     volumes:
-     - ./voting-app:/app
+      - ./voting-app:/app
+    working_dir: /app
     ports:
       - "5000:80"
     links:
       - redis
+    environment:
+      - OPTION_A
+      - OPTION_B
     networks:
       - front-tier
       - back-tier
 
   result-app:
-    build: ./result-app/.
+    image: pottava/nodejs
+    command: node server.js
     volumes:
       - ./result-app:/app
+    working_dir: /app
     ports:
-      - "5001:80"
+      - "5001:4000"
     links:
       - db
     networks:
@@ -34,23 +41,21 @@ services:
       - back-tier
 
   redis:
-    image: redis
+    image: pottava/redis
     ports: ["6379"]
     networks:
       - back-tier
 
   db:
-    image: postgres:9.4
+    image: kiasaki/alpine-postgres
     volumes:
-      - "db-data:/var/lib/postgresql/data"
+      - "postgres-data:/var/lib/postgresql/data"
     networks:
       - back-tier
 
 volumes:
-  db-data:
+  postgres-data:
 
 networks:
   front-tier:
   back-tier:
-
-

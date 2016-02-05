@@ -1,0 +1,9 @@
+version: "2"
+
+services:
+  result-app:
+    image: pottava/nodejs
+    command: npm install
+    volumes:
+      - ./result-app:/app
+    working_dir: /app
