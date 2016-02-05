@@ -1,0 +1,31 @@
+voting-app:
+  image: @VOTING
+  ports:
+    - "5000:80"
+  environment:
+    - OPTION_A=Cats
+    - OPTION_B=Dogs
+    - REDIS_HOST=@HOST
+
+result-app:
+  image: @RESULT
+  ports:
+    - "5001:80"
+  environment:
+    - DB_HOST=@HOST
+
+worker:
+  image: @WORKER
+  environment:
+    - DB_HOST=@HOST
+    - REDIS_HOST=@HOST
+
+redis:
+  image: pottava/redis
+  ports:
+    - "6379:6379"
+
+db:
+  image: kiasaki/alpine-postgres
+  ports:
+    - "5432:5432"

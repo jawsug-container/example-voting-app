@@ -11,6 +11,7 @@ var express = require('express'),
 io.set('transports', ['polling']);
 
 var port = process.env.PORT || 4000;
+var db = process.env.DB_HOST || 'db';
 
 io.sockets.on('connection', function (socket) {
 
@@ -24,7 +25,7 @@ io.sockets.on('connection', function (socket) {
 async.retry(
   {times: 1000, interval: 1000},
   function(callback) {
-    pg.connect('postgres://postgres@db/postgres', function(err, client, done) {
+    pg.connect('postgres://postgres@'+db+'/postgres', function(err, client, done) {
       if (err) {
         console.error("Failed to connect to db");
       }

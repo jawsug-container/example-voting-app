@@ -15,6 +15,7 @@ services:
     environment:
       - OPTION_A
       - OPTION_B
+      - REDIS_HOST=redis
     networks:
       - front-tier
       - back-tier
@@ -29,6 +30,8 @@ services:
       - "5001:4000"
     links:
       - db
+    environment:
+      - DB_HOST=db
     networks:
       - front-tier
       - back-tier
@@ -38,6 +41,9 @@ services:
     links:
       - db
       - redis
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
     networks:
       - back-tier
 

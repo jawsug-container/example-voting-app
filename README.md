@@ -19,28 +19,53 @@ Docker Compose で起動し、Docker Networking を使いお互いに通信し�
 起動手順
 ------------------
 
-1. このディレクトリへ移動
+１. このディレクトリへ移動
 
 ```
-$ git clone <this-repository>
-$ cd example-voting-app
+git clone <this-repository>
+cd example-voting-app
 ```
 
-2. 各サービスの依存性を解決します（初回 + 依存性変更後）
+２. 各サービスの依存性を解決（初回 + 依存性変更後）
 
 ```
-$ docker-compose -f docker-compose-dependencies.yml run voting-app
-$ docker-compose -f docker-compose-dependencies.yml run result-app
-$ docker-compose -f docker-compose-dependencies.yml run worker
+docker-compose -f docker-compose-dependencies.yml run voting-app
+docker-compose -f docker-compose-dependencies.yml run result-app
+docker-compose -f docker-compose-dependencies.yml run worker
 ```
 
-3. アプリケーションを起動します
+３. アプリケーションの起動
 
 ```
-$ docker-compose up
+export OPTION_A=Cats OPTION_B=Dogs
+docker-compose up -d
 ```
 
 投票は 5000 番ポート、結果は 5001 番ポートで繋がります。
+
+
+その他
+------------------
+
+* ログの確認
+
+```
+docker-compose logs
+（停止: Ctrl + C）
+```
+
+* 投票画面の文言を変えてみます
+
+```
+export OPTION_A="Star Wars" OPTION_B="Star Trek"
+docker-compose stop voting-app
+docker-compose rm -f voting-app
+docker-compose up -d
+```
+
+
+AWS へデプロイ
+------------------
 
 
 Docker イメージ
