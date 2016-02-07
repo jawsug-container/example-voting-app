@@ -26,7 +26,9 @@ git clone <this-repository>
 cd example-voting-app
 ```
 
-２. 各サービスの依存性を解決（初回 + 依存性変更後）
+２. 各サービスの依存性を解決（初回 + 依存性変更後）  
+　※ ローカルのソースコードをコンテナへマウントする形式に変更し、  
+　　開発がより簡単に行えるよう構成を変更しています。
 
 ```
 docker-compose -f docker-compose-dependencies.yml run voting-app
@@ -54,8 +56,7 @@ docker-compose logs
 （停止: Ctrl + C）
 ```
 
-* 投票画面の文言を変えてみる
-
+* 投票画面の文言を変えてみる  
 投票画面の文字は、環境変数で切り替わるようになっています。
 
 ```
@@ -65,10 +66,9 @@ docker-compose rm -f voting-app
 docker-compose up -d
 ```
 
-* 投票**結果**画面の文言を変えてみる
-
-投票結果画面の文字は、HTML にベタ書きされています。
-
+* 投票**結果**画面の文言を変えてみる  
+投票結果画面の文字は、HTML にベタ書きされています。  
+　  
 `/result-app/views/index.html` の Cats や Dogs を書き換えてみましょう。  
 ブラウザを更新すると、投票結果画面の文字が変わります。
 
@@ -77,7 +77,7 @@ Docker イメージ
 ------------------
 
 各サービスで利用されている Docker イメージは、すべて Docker Hub で自動的に生成されているものです。  
-（データ転送速度向上のため、Docker 公式とは異なり、一部 [Alpine Linux](http://www.alpinelinux.org/) ベースのものに変更しています）
+（データ転送速度向上のため、[Alpine Linux](http://www.alpinelinux.org/) ベースのものに変更しています）
 
  - [pottava/python:2.7](https://hub.docker.com/r/pottava/python/)
  - [pottava/nodejs](https://hub.docker.com/r/pottava/nodejs/)
