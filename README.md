@@ -54,7 +54,9 @@ docker-compose logs
 （停止: Ctrl + C）
 ```
 
-* 投票画面の文言を変えてみます
+* 投票画面の文言を変えてみる
+
+投票画面の文字は、環境変数で切り替わるようになっています。
 
 ```
 export OPTION_A="Star Wars" OPTION_B="Star Trek"
@@ -63,9 +65,12 @@ docker-compose rm -f voting-app
 docker-compose up -d
 ```
 
+* 投票**結果**画面の文言を変えてみる
 
-AWS へデプロイ
-------------------
+投票結果画面の文字は、HTML にベタ書きされています。
+
+`/result-app/views/index.html` の Cats や Dogs を書き換えてみましょう。  
+ブラウザを更新すると、投票結果画面の文字が変わります。
 
 
 Docker イメージ
